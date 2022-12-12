@@ -1,0 +1,62 @@
+---
+import { getPicture } from "@astrojs/image";
+import { Picture } from "@astrojs/image/components";
+
+const array: string[] = [
+  "https://i.picsum.photos/id/327/1600/900.jpg?hmac=GmHcIPwpwgLkV9bdyFC-0HtppoMUeGDKCho5prcbX0w",
+  "https://i.picsum.photos/id/640/1600/900.jpg?hmac=yd2JZfvh1rGjbh39XD0rWjNsUJl_Evkmg9_t7rYniiI",
+];
+const picturesArray = await Promise.all(
+  array.map(
+    async (img, i) =>
+      await getPicture({
+        src: img,
+        aspectRatio: 16 / 9,
+        widths: [320, 480, 540, 640, 720, 960],
+        alt: `Picture ${i}`,
+        formats: ["webp", "avif"],
+      })
+  )
+);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>Astro</h1>
+    {
+      picturesArray.map((picture, i) => (
+        <picture>
+          {picture.sources.map((source) => (
+            <source {...source} sizes="(min-width: 1024px) 50vw, 100vw" />
+          ))}
+          <img {...picture.image} />
+        </picture>
+      ))
+    }
+    {
+      array.map((img, i) => (
+        <Picture
+          src={img}
+          alt={`Picture ${i}`}
+          aspectRatio={16 / 9}
+          widths={[320, 480, 540, 640, 720, 960]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+      ))
+    }
+  </body>
+</html>
+
+<style>
+  img {
+    max-width: 100%;
+    object-fit: cover;
+  }
+</style>
