@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/image": "^0.12.0",
     "@astrojs/react": "^1.2.2",
-    "@astrojs/vercel": "^2.3.4",
+    "@astrojs/vercel": "^0.0.0-set-cookie-20221212172245",
     "@types/node": "^18.11.13",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
