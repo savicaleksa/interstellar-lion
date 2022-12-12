@@ -30,7 +30,7 @@ const picturesArray = await Promise.all(
   </head>
   <body>
     <h1>Astro</h1>
-    {
+    <!-- {
       picturesArray.map((picture, i) => (
         <picture>
           {picture.sources.map((source) => (
@@ -39,8 +39,8 @@ const picturesArray = await Promise.all(
           <img {...picture.image} />
         </picture>
       ))
-    }
-    <!-- {
+    } -->
+    {
       array.map((img, i) => (
         <Picture
           src={img}
@@ -50,7 +50,7 @@ const picturesArray = await Promise.all(
           sizes="(min-width: 1024px) 50vw, 100vw"
         />
       ))
-    } -->
+    }
   </body>
 </html>
 
